@@ -42,20 +42,20 @@ self.info (the value of the node)
 """
 def topView(root):
     #Write your code here
-    if root is None:
+    if root is None: # check to prevent infinite runtime error
         return
     d = {}
     def traverse(root, h, l):
-        if root is None:
+        if root is None:   # check to prevent infinite runtime error
             return
         if root:
-            if h not in d or d[h][1]>l:
-                d[h] = [root.info,l]
-        traverse(root.left,h-1,l+1)
-        traverse(root.right,h+1,l+1)
+            if h not in d or d[h][1]>l:  #if h is not in dictionary or level of cuurent node is more than the previous then add to dict.
+                d[h] = [root.info,l]   # here height is the key {h: [root, l]} and it's root value and level is value in form of a list
+        traverse(root.left,h-1,l+1)  # as the level increase and left side of root the height descreses
+        traverse(root.right,h+1,l+1)  # as the level increases and right side of the root the height increases
     traverse(root,0,0)
     
-    for h in sorted(d.keys()):
+    for h in sorted(d.keys()):  # sort the elements like using height(key) of a node.
         print(d[h][0], end = " ")
         
         
